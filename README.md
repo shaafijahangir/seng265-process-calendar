@@ -36,4 +36,4 @@ The Calendar Event Parser is a Python project that facilitates the extraction an
 ## Usage
 
 ```bash
-./tester4.py --start=2021/01/24 --end=2021/4/15 --file=example.ics
+./tester4.py --start=2021/01/24 --end=2021/4/15 --file=<example>.ics
