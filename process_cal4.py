@@ -3,17 +3,15 @@ import sys
 import re
 import datetime
 
-
 class process_cal:
 	def __init__(self,fname):
 		self.fname=fname
-		self.listOfEvents = []			#list of event dictionaries
+		self.listOfEvents = []				#list of event dictionaries
 		self.tempDict = {}				#temp dictionary to push into list
 		self.rEvent = {}				#rrule events in dictionary to be pushed in list
 
-
-	def parseAndStore(self, date):			#parses each line in the file and stores
-		rruleDict = False					#them accordingly in the temporary dictionary
+	def parseAndStore(self, date):				#parses each line in the file and stores
+		rruleDict = False				#them accordingly in the temporary dictionary
 		added_to_list= False				#which is then pushed into our list of events
 	
 		with open(self.fname,'r') as f:
@@ -95,13 +93,11 @@ class process_cal:
 
 		#when all the events are appended to list, we return the list to be used to print
 		if added_to_list == True:
-
 			# sortedList = sorted(self.list_of_events, key=lambda d: d['DTSTART'])
 			return self.listOfEvents
 		else:
 			return None
 		
-
 	#formatting the int time into proper formatted time used in the printing
 	def timeFormatter(self, TF):
 		h = TF.strftime("%I")
@@ -109,7 +105,6 @@ class process_cal:
 			return TF.strftime(" %-I:%M %p")
 		else:
 			return TF.strftime("%-I:%M %p") 
-
 
 	#formatting the int date into proper formatted date used in the printing
 	def dateFormatter(self, DS):
@@ -130,55 +125,3 @@ class process_cal:
 				#concatted strings to be printed in the command line
 				output = formattedDT+dashLine+formattedEv
 		return output
-
-
-#this is code I was working on for printing multiple events on the same day
-#please do not take this as I forgot to delete commented output code, but rather an effort to print
-#multiple events within one day
-
-	# def get_events_for_day(self, date):
-	# 	list = self.parseAndStore(date)
-	# 	time = date.strftime("%H:%M:%S")
-	# 	Inside = False
-	# 	MultExists = False
-	# 	output =''
-	# 	details = ''
-	# 	templist = []
-	# 	shortenedList = []
-	# 	multipleEvent = []
-	# 	# print(date)
-	# 	# print(time)
-
-	# 	for i in self.listOfEvents:
-	# 		# if('11:15:00' == '0001-01-01 11:15:00' ):
-	# 		# 	print('dtsrttime:', i['DTSTARTtime'], '\n')
-			
-	# 		if date == i['DTSTART'] and time != i['DTSTARTtime']:
-	# 			# MultExists = True
-	# 			shortenedList.append(i)
-	# 		# if date == i['DTSTART'] and time == i['DTSTARTtime']:
-	# 		# 	MultExists = False
-	# 		# 	templist.append(i)
-		
-	# 	if(MultExists == True):
-	# 		for j in shortenedList:
-	# 			Inside = True
-	# 			formattedDT= str(self.dateFormatter(j['DTSTART'])) + '\n'
-	# 			dashLine= str('-'*len(self.dateFormatter(j['DTSTART'])))+"\n"
-	# 			formattedEv= str(self.timeFormatter(j['DTSTARTtime']))+" to "+str(self.timeFormatter(j['DTENDtime']))+": "+str(j['SUMMARY'])+" {{"+str(j['LOCATION'])+"}}"
-	# 			formattedEv = str(formattedEv)
-	# 			multipleEvent.append(formattedEv)
-	# 		details = '\n'.join([str(item) for item in multipleEvent])
-	# 		if Inside == True:
-	# 			output = formattedDT+dashLine+details
-	# 	else:
-	# 		for j in templist:
-				
-	# 			Inside = True
-	# 			formattedDT= str(self.dateFormatter(j['DTSTART'])) + '\n'
-	# 			dashLine= str('-'*len(self.dateFormatter(j['DTSTART'])))+"\n"
-	# 			formattedEv= str(self.timeFormatter(j['DTSTARTtime']))+" to "+str(self.timeFormatter(j['DTENDtime']))+": "+str(j['SUMMARY'])+" {{"+str(j['LOCATION'])+"}}"
-	# 			formattedEv = str(formattedEv)
-	# 		if Inside == True:
-	# 			output = formattedDT+dashLine+formattedEv
-	# 	return output
