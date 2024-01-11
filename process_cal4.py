@@ -1,8 +1,4 @@
 #!/usr/bin/env python3
-
-# M Shaafi Jahangir
-# V00960196
-
 import sys
 import re
 import datetime
